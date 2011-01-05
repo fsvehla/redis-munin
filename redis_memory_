@@ -19,6 +19,6 @@ else
   redis = Redis.new(:host => ip, :port => port)
   info  = redis.info
 
-  puts "memory.value" + " " + info[:used_memory].to_s
+  puts "memory.value" + " " + info['used_memory'].to_s
 end
 

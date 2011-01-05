@@ -14,11 +14,11 @@ if config
   puts "graph_title Redis Total Commands"
   puts "graph_category redis"
 
-  puts "memory.label commands"
+  puts "commands.label commands"
 else
   redis = Redis.new(:host => ip, :port => port)
   info  = redis.info
 
-  puts "memory.value" + " " + info[:total_commands_processed].to_s
+  puts "commands.value" + " " + info['total_commands_processed'].to_s
 end
 

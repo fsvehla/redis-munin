@@ -11,14 +11,14 @@ port = port.nil? ? 6379 : port
 config = ARGV.any? { |a| a =~ /config/ }
 
 if config
-  puts "graph_title Redis Connections"
+  puts "graph_title Redis Clients"
   puts "graph_category redis"
 
-  puts "memory.label Connections"
+  puts "clients.label Clients"
 else
   redis = Redis.new(:host => ip, :port => port)
   info  = redis.info
 
-  puts "memory.value" + " " + (info[:connected_clients].to_i - 1).to_s
+  puts "clients.value" + " " + (info['connected_clients'].to_i - 1).to_s
 end
 

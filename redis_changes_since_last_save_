@@ -14,11 +14,11 @@ if config
   puts "graph_title Redis Changes since last save"
   puts "graph_category redis"
 
-  puts "memory.label changes"
+  puts "changes.label changes"
 else
   redis = Redis.new(:host => ip, :port => port)
   info  = redis.info
 
-  puts "memory.value" + " " + info[:changes_since_last_save].to_s
+  puts "changes.value" + " " + info['changes_since_last_save'].to_s
 end
 
