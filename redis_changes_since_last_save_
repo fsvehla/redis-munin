@@ -12,7 +12,7 @@ config = ARGV.any? { |a| a =~ /config/ }
 
 if config
   puts "graph_title Redis Changes since last save"
-  puts "graph_category other"
+  puts "graph_category redis"
 
   puts "memory.label changes"
 else
