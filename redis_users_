@@ -14,7 +14,7 @@ if config
   puts "graph_title Redis Clients"
   puts "graph_category redis"
 
-  puts "clients.label Clients"
+  puts "clients.label clients"
 else
   redis = Redis.new(:host => ip, :port => port)
   info  = redis.info
