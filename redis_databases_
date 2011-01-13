@@ -18,12 +18,18 @@ if config
   puts "graph_info Display the number of keys by DB"
   puts "graph_args -l 0"
 
+  area_done = false
   infos.each_key do |db|
+    type = 'STACK'
+    if !area_done
+      type = 'AREA'
+      area_done = true
+    end
     puts "#{db}_keys.label #{db}"
     puts "#{db}_keys.info db #{db}"
     puts "#{db}_keys.type GAUGE"
     puts "#{db}_keys.min 0"
-    puts "#{db}_keys.draw STACK"
+    puts "#{db}_keys.draw #{type}"
 
     puts "#{db}_expires.label #{db}"
     puts "#{db}_expires.info db #{db}"

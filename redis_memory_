@@ -21,7 +21,7 @@ if config
   puts "memory.info Amount of mem used by redis"
   puts "memory.type GAUGE"
   puts "memory.min 0"
-  puts "memory.draw STACK"
+  puts "memory.draw AREA"
 
 else
   redis = Redis.new(:host => ip, :port => port)
