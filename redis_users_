@@ -13,12 +13,15 @@ config = ARGV.any? { |a| a =~ /config/ }
 if config
   puts "graph_title Redis Clients"
   puts "graph_category redis"
+  puts "graph_vlabel connections/s"
+  puts "graph_info This graph monitors the number of clients"
 
-  puts "clients.label clients"
+  puts "users.label clients"
+  puts "connections.type GAUGE"
+  puts "connections.min 0"
 else
   redis = Redis.new(:host => ip, :port => port)
   info  = redis.info
 
-  puts "clients.value" + " " + (info['connected_clients'].to_i - 1).to_s
+  puts "users.value" + " " + (info['connected_clients'].to_i - 1).to_s
 end
-
