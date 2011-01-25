@@ -16,7 +16,7 @@ if config
   puts "graph_vlabel connections/s"
   puts "graph_info This graph monitors the number of clients"
 
-  puts "users.label clients"
+  puts "connections.label clients"
   puts "connections.type GAUGE"
   puts "connections.min 0"
 else

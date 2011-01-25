@@ -58,3 +58,34 @@ Scripts
 * redis_users_
 
     Current clients
+
+* resque_failed_
+
+    COUNTER for failures
+
+    Need resque-web
+
+    TODO use driver or netcat or telnet 
+
+* resque_workers_
+
+    % of working workers
+
+    Need resque-web
+
+    TODO use driver or netcat or telnet
+
+* resque_queues_
+
+    COUNTER for in / out jobs per queue.
+    This ones needs some hooks to create the stats:
+
+        def self.after_enqueue(*job_args)
+            Resque::Stat.incr(@queue.to_s + ":pushed")
+        end
+
+        def self.after_perform(*job_args)
+            Resque::Stat.incr(@queue.to_s + ":finished")
+        end
+        
+    https://github.com/defunkt/resque/blob/master/docs/HOOKS.md
