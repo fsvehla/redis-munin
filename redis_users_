@@ -16,12 +16,12 @@ if config
   puts "graph_vlabel connections/s"
   puts "graph_info This graph monitors the number of clients"
 
-  puts "connections.label clients"
-  puts "connections.type GAUGE"
-  puts "connections.min 0"
+  puts "clients.label clients"
+  puts "clients.type GAUGE"
+  puts "clients.min 0"
 else
   redis = Redis.new(:host => ip, :port => port)
   info  = redis.info
 
-  puts "users.value" + " " + (info['connected_clients'].to_i - 1).to_s
+  puts "clients.value" + " " + (info['connected_clients'].to_i - 1).to_s
 end
