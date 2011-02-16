@@ -89,3 +89,9 @@ Scripts
         end
         
     https://github.com/defunkt/resque/blob/master/docs/HOOKS.md
+
+Changelog
+=======
+
+ * fixed redis_databases_ labels (thanks japerk)
+

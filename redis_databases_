@@ -25,13 +25,13 @@ if config
       type = 'AREA'
       area_done = true
     end
-    puts "#{db}_keys.label #{db}"
+    puts "#{db}_keys.label #{db}_keys"
     puts "#{db}_keys.info db #{db}"
     puts "#{db}_keys.type GAUGE"
     puts "#{db}_keys.min 0"
     puts "#{db}_keys.draw #{type}"
 
-    puts "#{db}_expires.label #{db}"
+    puts "#{db}_expires.label #{db}_expires"
     puts "#{db}_expires.info db #{db}"
     puts "#{db}_expires.type GAUGE"
     puts "#{db}_expires.min 0"
