@@ -11,6 +11,8 @@ port = port.nil? ? 6379 : port
 config = ARGV.any? { |a| a =~ /config/ }
 
 if config
+  puts "graph_order commands hits misses"
+
   puts "graph_title Redis Commands rate"
   puts "graph_category redis"
   puts "graph_vlabel commands/s"
@@ -19,9 +21,19 @@ if config
   puts "commands.label commands/s"
   puts "commands.type COUNTER"
   puts "commands.min 0"
+
+  puts "hits.label cache hits"
+  puts "hits.type COUNTER"
+  puts "hits.min 0"
+
+  puts "misses.label cache misses"
+  puts "misses.type COUNTER"
+  puts "misses.min 0"
 else
   redis = Redis.new(:host => ip, :port => port)
   info  = redis.info
 
   puts "commands.value" + " " + info['total_commands_processed'].to_s
+  puts "hits.value #{info['keyspace_hits']}"
+  puts "misses.value #{info['keyspace_misses']}"
 end

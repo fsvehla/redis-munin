@@ -93,5 +93,6 @@ Scripts
 Changelog
 =======
 
+ * added keyspace hit/miss statistics (** Christian Parpart <trapni@gentoo.org> **)
  * fixed redis_databases_ labels (thanks japerk)
 
