@@ -9,7 +9,7 @@ Installation
 1. copy the file in /usr/share/munin/plugins/
 2. make a link with the parameters you want in /etc/munin/plugins/
 
-> ln -s /usr/share/munin/plugins/redis_memory_ /etc/munin/plugins/redis_memory_127_0_0_1_6379
+        ln -s /usr/share/munin/plugins/redis_memory_ /etc/munin/plugins/redis_memory_127_0_0_1_6379
 
 Usage
 ==========
@@ -17,16 +17,16 @@ Usage
 Parameters
 -------
 
-The parameters are in the filename in the format _IP_PORT, where IP is the 4 part ipv4 separated by '_'
+The parameters are in the filename in the format \_IP\_PORT, where IP is the 4 part ipv4 separated by '\_'.
 
 Valid link name
 ---------------
 
-Note the ending '_' when no ip or port:
+Note the ending '\_' when no ip or port:
 
-* redis_command_
-* redis_command_1_2_3_4_
-* redis_command_1_2_3_4_port
+* redis\_command\_
+* redis\_command\_1\_2\_3\_4\_
+* redis\_command\_1\_2\_3\_4\_port
 
 ip will default to 127.0.0.1
 
@@ -35,31 +35,31 @@ port will default to 6379
 Scripts
 =======
 
-* redis_change_since_last_save_
+* redis\_change\_since\_last\_save\_
 
     Number of changes since last save
 
-* redis_databases_
+* redis\_databases\_
 
     List all DBs with number of keys and expire
 
-* redis_memory_
+* redis\_memory\_
 
     Used memory
 
-* redis_total_commands_
+* redis\_total\_commands\_
 
     Total commands
 
-* redis_total_connections_
+* redis\_total\_connections\_
 
     Total connections
 
-* redis_users_
+* redis\_users\_
 
     Current clients
 
-* resque_failed_
+* resque\_failed\_
 
     COUNTER for failures
 
@@ -67,7 +67,7 @@ Scripts
 
     TODO use driver or netcat or telnet 
 
-* resque_workers_
+* resque\_workers\_
 
     % of working workers
 
@@ -75,7 +75,7 @@ Scripts
 
     TODO use driver or netcat or telnet
 
-* resque_queues_
+* resque\_queues\_
 
     COUNTER for in / out jobs per queue.
     This ones needs some hooks to create the stats:
@@ -94,5 +94,5 @@ Changelog
 =======
 
  * added keyspace hit/miss statistics (** Christian Parpart <trapni@gentoo.org> **)
- * fixed redis_databases_ labels (thanks japerk)
+ * fixed redis\_databases\_ labels (thanks japerk)
 
