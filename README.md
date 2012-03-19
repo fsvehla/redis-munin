@@ -9,7 +9,7 @@ Installation
 1. copy the file in /usr/share/munin/plugins/
 2. make a link with the parameters you want in /etc/munin/plugins/
 
-        ln -s /usr/share/munin/plugins/redis\_memory\_ /etc/munin/plugins/redis\_memory\_127\_0\_0\_1\_6379
+        ln -s /usr/share/munin/plugins/redis_memory_ /etc/munin/plugins/redis_memory_127_0_0_1_6379
 
 Usage
 ==========
