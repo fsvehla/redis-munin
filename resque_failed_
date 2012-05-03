@@ -1,8 +1,7 @@
-#!/bin/env ruby
+#!/usr/bin/env ruby
+
 require 'net/http'
 require 'uri'
-
-
 
 $0 =~ /resque_failed_(\d+_\d+_\d+_\d+)_(\d+)$/
 port = $2
