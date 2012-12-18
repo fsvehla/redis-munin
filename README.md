@@ -18,11 +18,12 @@ Parameters
 -------
 
 The parameters are in the filename in the format \_IP\_PORT, where IP is the 4 part ipv4 separated by '\_'.
+They can also be set in YAML via a file in the munin `plugin-conf.` named redis.conf.  
 
 Valid link name
 ---------------
 
-Note the ending '\_' when no ip or port:
+Note the ending '\_' when no ip or port or when not using a config file:
 
 * redis\_command\_
 * redis\_command\_1\_2\_3\_4\_
