@@ -5,8 +5,8 @@ require 'redis'
 require 'yaml'
 
 redis_contructor_info = {}
+configFilePath = File.join(File::SEPARATOR,"munin","plugin-conf.d","redis.conf")
 
-configFilePath = File.join("..","plugin-conf.d","redis.conf")
 if (File.exists?(configFilePath)) 
   redis_constructor_info = YAML.load(configFilePath)
 else
