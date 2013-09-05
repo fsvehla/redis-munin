@@ -10,6 +10,15 @@ Installation
 2. make a link with the parameters you want in /etc/munin/plugins/
 
         ln -s /usr/share/munin/plugins/redis_memory_ /etc/munin/plugins/redis_memory_127_0_0_1_6379
+        
+3. make sure there's a gem `redis` available for munin user
+
+        su -s /bin/bash munin
+        gem list
+        
+    if `redis` is not available install it with:
+
+        gem install redis
 
 Usage
 ==========
