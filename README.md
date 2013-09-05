@@ -18,7 +18,7 @@ Installation
         
     if `redis` is not available install it with:
 
-     gem install redis
+        gem install redis
 
 Usage
 ==========
