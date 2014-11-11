@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+
+require 'net/http'
+require 'uri'
+
+$0 =~ /resque_failed_(\d+_\d+_\d+_\d+)_(\d+)$/
+port = $2
+ip = $1.gsub('_','.')
+
+port = 5678 #unless port
+ip = 'localhost' unless ip
+
+if ARGV[0] == "config"
+  puts "graph_title Resque Failure rate"
+  puts "graph_category resque"
+  puts "graph_info This graph shows resque workers that failed"
+  puts "graph_args --lower-limit 0"
+  puts 'graph_vlabel fails/s'
+
+  puts 'failed.label Failed per/s'
+  puts 'failed.type COUNTER'
+
+  exit 0
+end
+failed = nil
+f = Net::HTTP.get URI.parse("http://#{ip}:#{port}/stats.txt")
+f.split(' ').each do |l|
+if l =~ /resque\.failed.?=(\d+)/
+    failed = $1.to_i
+  end
+end
+puts "failed.value #{failed}"

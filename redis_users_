@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'redis'
+require 'yaml'
+
+redis_contructor_info = {}
+
+configFilePath = File.join(File::SEPARATOR,"etc","munin","plugin-conf.d","redis.conf")
+if (File.exists?(configFilePath)) 
+  redis_constructor_info = YAML.load(File.open(configFilePath))
+else
+  $0 =~ /_(\d+_\d+_\d+_\d+)_(\d+)$/
+  ip, port = $1, $2
+  ip = ip.nil? ? '127.0.0.1' : ip.gsub!(/_/, '.')
+  port = port.nil? ? 6379 : port
+  redis_constructor_info = { :host => ip, :port => port }
+end
+
+config = ARGV.any? { |a| a =~ /config/ }
+
+if config
+  puts "graph_title Redis Clients"
+  puts "graph_category redis"
+  puts "graph_vlabel connections/s"
+  puts "graph_info This graph monitors the number of clients"
+
+  puts "clients.label clients"
+  puts "clients.type GAUGE"
+  puts "clients.min 0"
+else
+  redis = Redis.new(redis_constructor_info)
+  info  = redis.info
+
+  puts "clients.value" + " " + (info['connected_clients'].to_i - 1).to_s
+end
