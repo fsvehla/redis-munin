@@ -28,7 +28,12 @@ Parameters
 
 The parameters are in the filename in the format \_IP\_PORT, where IP is the 4 part ipv4 separated by '\_'.
 They can also be set in YAML via a file in the munin `plugin-conf.d` named redis.conf.  
-Add your password `:password => "your_password"`
+
+Password
+-------
+
+Set your redis password `:password => "your_password"`, in /usr/share/munin/plugins/redis_*
+
 Valid link name
 ---------------
 
