@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'redis'
+
+$0 =~ /_(\d+_\d+_\d+_\d+)_(\d+)$/
+ip, port = $1, $2
+ip     = ip.nil? ? '127.0.0.1' : ip.gsub!(/_/, '.')
+port   = port.nil? ? 6379 : port
+
+config = ARGV.any? { |a| a =~ /config/ }
+
+redis  = Redis.new(:host => ip, :port => port)
+queues = Array(redis.smembers("resque:queues"))
+
+if config
+
+  puts "graph_title Redis Connections rate"
+  puts "graph_category resque"
+  puts "graph_vlabel queue rates/s"
+  puts "graph_info This graph monitors the in and out rate of the queues"
+  puts "graph_args --lower-limit 0"
+
+  queues.each do |q|
+    puts "#{q}_pushed.label #{q}_pushed"
+    puts "#{q}_pushed.type COUNTER"
+
+    puts "#{q}_finished.label #{q}_finished"
+    puts "#{q}_finished.type COUNTER"
+  end
+
+else
+  queues.each do |q|
+    pushed   = redis.get("resque:stat:#{q}:pushed") || 0
+    finished = redis.get("resque:stat:#{q}:finished") || 0
+    puts "#{q}_pushed.value #{pushed}"
+    puts "#{q}_finished.value #{finished}"
+  end
+
+end

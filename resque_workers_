@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+require 'net/http'
+require 'uri'
+
+
+$0 =~ /resque_stats_(\d+_\d+_\d+_\d+)_(\d+)$/
+port = $2
+ip   = $1.gsub('_', '.')
+
+port = 5678 #unless port
+ip = 'localhost' unless ip
+
+if ARGV[0] == "config"
+  puts "graph_title Resque Workers in use"
+  puts "graph_category resque"
+  puts "graph_info This graph shows resque workers in use vs. the total"
+  puts "graph_args --lower-limit 0 --upper-limit 100"
+  puts 'graph_vlabel %'
+
+  puts 'workers.label workers'
+  puts 'workers.type GAUGE'
+
+  exit 0
+end
+workers = 1
+working = 0
+f       = Net::HTTP.get URI.parse("http://#{ip}:#{port}/stats.txt")
+f.split(' ').each do |l|
+  if l =~ /resque.workers=(\d+)/
+    workers = $1.to_i
+  elsif l =~ /resque.working=(\d+)/
+    working = $1.to_i
+  end
+end
+puts "workers.value #{working/workers}"

@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+require 'rubygems'
+require 'redis'
+require 'yaml'
+
+redis_contructor_info = {}
+
+configFilePath = File.join(File::SEPARATOR,"etc","munin","plugin-conf.d","redis.conf")
+if (File.exists?(configFilePath)) 
+  redis_constructor_info = YAML.load(File.open(configFilePath))
+else
+  $0 =~ /_(\d+_\d+_\d+_\d+)_(\d+)$/
+  ip, port = $1, $2
+  ip = ip.nil? ? '127.0.0.1' : ip.gsub!(/_/, '.')
+  port = port.nil? ? 6379 : port
+  redis_constructor_info = { :host => ip, :port => port }
+end
+
+config = ARGV.any? { |a| a =~ /config/ }
+
+if config
+  puts "graph_title Redis Changes since last save"
+  puts "graph_category redis"
+
+  puts "changes.label changes"
+else
+  redis = Redis.new(redis_constructor_info)
+  info  = redis.info
+
+  puts "changes.value" + " " + info['changes_since_last_save'].to_s
+end
+
